@@ -1,0 +1,49 @@
+#!/bin/bash
+
+COLOR=ffffff
+LVL=$1
+if [[ -z $1 ]]; then
+		COLOR=ff0000
+		LVL=1
+elif [[ $1 = 5 ]]; then
+		COLOR=00ff00
+elif [[ $1 = 4 ]]; then
+		COLOR=0000ff
+elif [[ $1 = 3 ]]; then
+		COLOR=ffff00
+elif [[ $1 = 2 ]]; then
+		COLOR=ff8c00
+elif [[ $1 = 1 ]]; then
+		COLOR=ff0000
+elif [[ $1 = deactivate || $1 = off ]]; then
+		COLOR=ffffff
+else
+		COLOR=ff0000
+fi
+
+
+if [[ $COLOR != "ffffff" ]]; then
+		MSG="### DEFCON LEVEL SET TO $LVL ###"
+		printf "%${#MSG}s\n" | tr ' ' '#'
+		echo $MSG
+		printf "%${#MSG}s\n" | tr ' ' '#'
+		
+		for i in {0..3}; do
+				all $COLOR
+				all 000000
+		done
+		interpolate 000000 $COLOR 3
+else
+		MSG="### DEFCON WARNING DEACTIVATED ###"
+		printf "%${#MSG}s\n" | tr ' ' '#'
+		echo $MSG
+		printf "%${#MSG}s\n" | tr ' ' '#'
+		
+		all 000000
+		all 00ff00
+		all 000000
+		all 00ff00
+		all 000000
+		all 00ff00
+		interpolate 00ff00 ffffff 3
+fi
