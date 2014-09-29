@@ -1,0 +1,4 @@
+#!/bin/bash
+
+i2cledcontrol 4 $1
+i2cledcontrol 5 $1
